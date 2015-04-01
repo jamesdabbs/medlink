@@ -1,0 +1,10 @@
+%h1 Countries
+
+- if params[:letter]
+  = link_to "All countries", countries_path(country_search_params letter: nil)
+- else
+  = link_to "A countries", countries_path(country_search_params letter: "a")
+
+%ul
+  - @countries.each do |c|
+    %li= c.name

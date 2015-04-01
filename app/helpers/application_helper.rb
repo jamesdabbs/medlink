@@ -67,4 +67,13 @@ module ApplicationHelper
   def short_date date
     date.strftime "%B %d" # January 01
   end
+
+  def country_search_params opts={}
+    defaults = {}
+    params.each do |key, val|
+      next if key == :controller || key == :action
+      defaults[key] = val
+    end
+    defaults.merge opts
+  end
 end
