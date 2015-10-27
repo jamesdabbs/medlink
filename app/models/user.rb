@@ -107,4 +107,10 @@ class User < ActiveRecord::Base
       body:        body
     ).record_and_respond
   end
+
+  def ensure_secret_key!
+    unless secret_key.present?
+      update! secret_key: ApiAuth.generate_secret_key
+    end
+  end
 end

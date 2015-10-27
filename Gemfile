@@ -13,6 +13,9 @@ gem 'jquery-placeholder-rails'
 gem 'devise'
 gem 'pundit'
 
+gem 'api-auth'
+gem 'jbuilder'
+
 gem 'rollbar'
 gem 'sidekiq'
 gem 'sinatra', require: nil
@@ -40,6 +43,11 @@ group :development, :test do
 
   gem 'spring'
   gem 'spring-commands-rspec'
+end
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do

@@ -80,6 +80,13 @@ Medlink::Application.routes.draw do
   get '/help' => 'pages#help'
   root to: 'pages#root'
 
+  namespace :api do
+    namespace :v1 do
+      post '/login' => 'auth#login'
+      resources :requests, only: [:create, :index]
+    end
+  end
+
   post '/medrequest' => 'twilio#receive'
 
   authenticate :user, lambda { |u| u.admin? } do

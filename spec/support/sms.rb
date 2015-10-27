@@ -8,7 +8,7 @@ SentTwilioMessages = []
 class FakeMessage
   attr_reader :number, :body
   def initialize msg
-    @number = Phone.condense msg[:to]
+    @number = '+' + Phone.condense(msg[:to])
     @body   = msg[:body]
   end
 end
