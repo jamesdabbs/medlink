@@ -1,6 +1,48 @@
 = content_for :page_title do
   | Response Tracker
 
+div ng-controller="responseTrackerController"
+  .row
+    .col-md-4
+      input ng-model="textFilter" placeholder="Filter results" class="form-control"
+      .btn-group ng-model="typeFilter"
+        a.btn ng-click="select('all')" Unarchive
+        a.btn ng-click="select('archive')" Archived
+        a.btn ng-click="select('all')" All
+  .row
+    table.table.table-striped.table-hover
+      thead
+        tr
+          = sort :email
+          = sort :first_name
+          = sort :last_name
+          = sort :location
+          th Phone(s)
+          th Requests
+          th
+      tbody
+        tr ng-repeat="response in responses | filter:textFilter | orderBy:sort:reverse"
+          td= "{{response.user.email}}"
+          td= "{{response.user.first_name}}"
+          td= "{{response.user.last_name}}"
+          td= "{{response.user.location}}"
+          td
+            ul
+              li ng-repeat="phone in response.user.phones"
+                a href="tel:{{phone}}" = "{{phone}}"
+          td
+            table.table.table-condensed
+              thead
+                tr
+                  th Supply
+                  th Ordered
+                  th Response
+              tbody
+                tr ng-repeat="order in response.orders"
+                  td= "{{order.supply}}"
+                  td= "{{order.created_at}}"
+                  td= "{{order.response}}"
+
 - if current_user.country_id
   #response-tracker
     .btn-group
